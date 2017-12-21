@@ -2,33 +2,53 @@
 <html>
 <head>
     <title>Demo</title>
+    <link href="Css/StyleSheet.css" rel="stylesheet" />
     <link href="font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="js/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!---------------------------------------------------------------------------------------------->
-    <h3>ANVÄNDARE</h3>
-    <button id="recreate">Återskapa alla användare</button>
-    <br />
-    <button id="userswithclaims">Hämta alla användare med claims</button>
-    <!---------------------------------------------------------------------------------------------->
-    <h3>LOGGA IN</h3><i id="usersLoader" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-    <br />
-    <select id="selectedUser"></select>
-    <br />
-    <button id="login">Logga in</button>
-    <!---------------------------------------------------------------------------------------------->
-    <h3>KOLLA ACCESS</h3>
-    <button id="opennews">Kan se öppen nyhet?</button>
-    <br />
-    <button id="hiddennews">Kan se dold nyhet?</button>
-    <br />
-    <button id="hiddenandage">Kan se öppen nyhet och är 20 år eller äldre?</button>
-    <br />
-    <button id="sportsnews">Kan publicera sportnyhet?</button>
-    <br />
-    <button id="culturenews">Kan publicera kulturnyhet?</button>
-    <!---------------------------------------------------------------------------------------------->
-    <script src="js/jquery.js"></script>
+    <div class="centeredContent">
+
+        <div class="box">
+            <label class="custom-control custom-checkbox">
+                <input id="disableAlerts" type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Avaktivera alerts</span>
+            </label>
+
+            <h3>ANVÄNDARE</h3>
+            <button id="recreate" class="btn btn-primary btn-block">Återskapa alla användare</button>
+            <br />
+            <button id="userswithclaims" class="btn btn-primary btn-block">Hämta alla användare med claims</button>
+
+        </div>
+
+        <div class="box">
+            <h3>LOGGA IN</h3><i id="usersLoader" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            <select id="selectedUser" class="custom-select"></select>
+            <br />
+            <button id="login" class="btn btn-primary btn-block">Logga in</button>
+        </div>
+
+        <div class="box">
+            <h3>KOLLA ACCESS</h3>
+            <button id="opennews" class="btn btn-primary btn-block">Kan se öppen nyhet?</button>
+            <br />
+            <button id="hiddennews" class="btn btn-primary btn-block">Kan se dold nyhet?</button>
+            <br />
+            <button id="hiddenandage" class="btn btn-primary btn-block">Kan se öppen nyhet och är 20 år eller äldre?</button>
+            <br />
+            <button id="sportsnews" class="btn btn-primary btn-block">Kan publicera sportnyhet?</button>
+            <br />
+            <button id="culturenews" class="btn btn-primary btn-block">Kan publicera kulturnyhet?</button>
+        </div>
+
+    </div>
+
     <script src="js/demo.js"></script>
 </body>
 </html>

@@ -29,29 +29,6 @@ namespace NewsSite.Data
             roleManager.CreateAsync(new IdentityRole { Name = "Subscriber" }).Wait();
         }
 
-
-        async public Task AddRolesIfTheyDontExist()
-        {
-            string[] roles = new string[]
-            {
-                "Administrator",
-                "Publisher",
-                "Subscriber"
-            };
-
-            foreach (var role in roles)
-            {
-                if (!await roleManager.RoleExistsAsync(role))
-                {
-                    var newRole = new IdentityRole
-                    {
-                        Name = role
-                    };
-                    await roleManager.CreateAsync(newRole);
-                }
-            }
-        }
-
         private ApplicationUser[] UsersToCreate()
         {
             ApplicationUser[] users = new ApplicationUser[]
@@ -97,6 +74,16 @@ namespace NewsSite.Data
                 if (users[i].Role != null)
                     await userManager.AddToRoleAsync(users[i], users[i].Role);
             }
+        }
+
+        public ApplicationUser[] GetAllUsersWithClaims()
+        {
+            var allUsers = userManager.Users.ToArray();
+            foreach (var user in allUsers)
+            {
+                user.Claims = userManager.GetClaimsAsync(user).Result;
+            }
+            return allUsers;
         }
 
     }

@@ -16,10 +16,10 @@ namespace NewsSite.CustomRequirements
                 context.Succeed(requirement);
                 return Task.CompletedTask;
             }
-            else
+            else if (context.User.IsInRole("Publisher"))
             {
-                var publishClaims = context.User.Claims.Where(c => c.Type == "PublishRights");
-                foreach (var claim in publishClaims)
+                var userPublishClaims = context.User.Claims.Where(c => c.Type == "PublishRights");
+                foreach (var claim in userPublishClaims)
                 {
                     foreach (var publishRight in requirement.PublishRights)
                     {
