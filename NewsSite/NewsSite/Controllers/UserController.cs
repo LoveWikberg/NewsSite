@@ -32,15 +32,14 @@ namespace NewsSite.Controllers
         {
             await dhandler.RemoveAllUsers();
             await dhandler.CreateUsers();
-            // Return empty string to fix Firefix bug
-            return Ok("");
+            return Ok();
         }
 
         [HttpGet, Route("allUsers")]
         public IActionResult GetAllUserNames()
         {
-            var allUserEmails = userManager.Users.Select(user => user.UserName);
-            return Ok(allUserEmails);
+            var allUserNames = userManager.Users.Select(user => user.UserName);
+            return Ok(allUserNames);
         }
 
         [HttpPost, Route("signin")]
@@ -48,18 +47,13 @@ namespace NewsSite.Controllers
         {
             var user = await userManager.FindByNameAsync(userName);
             await signInManager.SignInAsync(user, false);
-            return Ok(user);
+            return Ok();
         }
 
         [HttpGet, Route("usersWithClaims")]
         public IActionResult GetAllUsersWithClaims()
         {
-            var allUsers = userManager.Users.ToList();
-            foreach (var user in allUsers)
-            {
-                user.Claims = userManager.GetClaimsAsync(user).Result;
-            }
-            return Ok(allUsers);
+            return Ok(dhandler.GetAllUsersWithClaims());
         }
     }
 }

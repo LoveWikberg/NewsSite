@@ -1,5 +1,5 @@
 ﻿$(function () {
-    fillDropdown();
+    fillDropdownWithUserNames();
 
     $('#login').click(function () {
         var user = $('#selectedUser').val();
@@ -23,7 +23,7 @@
     });
 
     $('#userswithclaims').click(function () {
-        usersWithClaims();
+        getUsersWithClaims();
     });
 
     $('#sportsnews').click(function () {
@@ -33,22 +33,16 @@
     $('#culturenews').click(function () {
         ajaxCall("news/cultureNews", "get");
     });
+
+    $('#disableAlerts').change(function () {
+        if ($('#disableAlerts').is(":checked"))
+            disableAlert = true;
+        else
+            disableAlert = false;
+    })
 });
 
-function usersWithClaims() {
-    $.ajax({
-        url: "user/usersWithClaims",
-        method: "GET"
-    })
-        .done(function (result) {
-            alert("success");
-            console.log(result);
-        })
-        .fail(function (xhr, status, error) {
-            alert("fail");
-            console.log(xhr, status, error);
-        });
-}
+var disableAlert = false;
 
 function ajaxCall(url, method) {
     $.ajax({
@@ -56,11 +50,26 @@ function ajaxCall(url, method) {
         method: method.toUpperCase()
     })
         .done(function (result) {
-            alert("success");
+            alertMsg("success");
             console.log(result);
         })
         .fail(function (xhr, status, error) {
-            alert("fail");
+            alertMsg("fail");
+            console.log(xhr, status, error);
+        });
+}
+
+function getUsersWithClaims() {
+    $.ajax({
+        url: "user/usersWithClaims",
+        method: "GET"
+    })
+        .done(function (result) {
+            alertMsg("success | Resultatet finns i konsolen");
+            console.log(result);
+        })
+        .fail(function (xhr, status, error) {
+            alertMsg("fail");
             console.log(xhr, status, error);
         });
 }
@@ -72,16 +81,15 @@ function signIn(user) {
         data: { userName: user }
     })
         .done(function (result) {
-            alert("success");
-            console.log("Inloggad användare: ", result);
+            alertMsg("success");
         })
         .fail(function (xhr, status, error) {
-            alert("fail");
+            alertMsg("fail");
             console.log(xhr, status, error);
         });
 }
 
-function fillDropdown() {
+function fillDropdownWithUserNames() {
     $.ajax({
         url: "user/allUsers",
         method: "GET"
@@ -95,7 +103,7 @@ function fillDropdown() {
             $("select").html(html);
         })
         .fail(function (xhr, status, error) {
-            alert("fail");
+            alertMsg("Failed to load usernames");
             console.log(xhr, status, error);
         })
         .always(function () {
@@ -108,3 +116,7 @@ function getHtmlForSelect(content) {
     return html;
 }
 
+function alertMsg(message) {
+    if (!disableAlert)
+        alert(message)
+}
