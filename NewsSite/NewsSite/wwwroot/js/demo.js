@@ -7,20 +7,19 @@
     });
 
     $('#opennews').click(function () {
-        ajaxCall("openNews", "get");
+        ajaxCall("news/openNews", "get");
     });
 
     $('#hiddennews').click(function () {
-        ajaxCall("hiddennews", "get");
+        ajaxCall("news/hiddennews", "get");
     });
 
     $('#hiddenandage').click(function () {
-        alert("tja");
-        ajaxCall("agelimitnews", "get");
+        ajaxCall("news/agelimitnews", "get");
     });
 
     $('#recreate').click(function () {
-        ajaxCall('recreateUsers', "post");
+        ajaxCall('user/recreateUsers', "post");
     });
 
     $('#userswithclaims').click(function () {
@@ -28,18 +27,18 @@
     });
 
     $('#sportsnews').click(function () {
-        ajaxCall("sportsNews", "get");
+        ajaxCall("news/sportsNews", "get");
     });
 
-    $('#culturesnews').click(function () {
-        ajaxCall("cultureNews", "get");
+    $('#culturenews').click(function () {
+        ajaxCall("news/cultureNews", "get");
     });
 });
 
 function usersWithClaims() {
     $.ajax({
-        url: "check/usersWithClaims",
-        method: "GET",
+        url: "user/usersWithClaims",
+        method: "GET"
     })
         .done(function (result) {
             alert("success");
@@ -53,7 +52,7 @@ function usersWithClaims() {
 
 function ajaxCall(url, method) {
     $.ajax({
-        url: "check/" + url,
+        url: url,
         method: method.toUpperCase()
     })
         .done(function (result) {
@@ -62,14 +61,14 @@ function ajaxCall(url, method) {
         })
         .fail(function (xhr, status, error) {
             alert("fail");
-            console.log(xhr, static, error);
-        })
-};
+            console.log(xhr, status, error);
+        });
+}
 
 function signIn(user) {
     $.ajax({
-        url: "check/signin",
-        method: "GET",
+        url: "user/signin",
+        method: "POST",
         data: { userName: user }
     })
         .done(function (result) {
@@ -80,11 +79,11 @@ function signIn(user) {
             alert("fail");
             console.log(xhr, status, error);
         });
-};
+}
 
 function fillDropdown() {
     $.ajax({
-        url: "check/allUsers",
+        url: "user/allUsers",
         method: "GET"
     })
         .done(function (result) {
@@ -97,12 +96,15 @@ function fillDropdown() {
         })
         .fail(function (xhr, status, error) {
             alert("fail");
-            console.log(xhr, static, error);
+            console.log(xhr, status, error);
         })
-};
+        .always(function () {
+            $('#usersLoader').remove();
+        });
+}
 
 function getHtmlForSelect(content) {
     var html = '<option>' + content + '</option>';
     return html;
-};
+}
 

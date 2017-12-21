@@ -34,6 +34,7 @@ namespace NewsSite
             services.AddTransient<DataHandler>();
 
             services.AddSingleton<IAuthorizationHandler, PublishRightsHandler>();
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("SportsNews", p => p.AddRequirements(new PublishRightsRequirements("Sports")));
@@ -48,9 +49,8 @@ namespace NewsSite
                             return true;
                     }
                     return false;
-                }));
-
-
+                }
+                ));
             });
 
         }
